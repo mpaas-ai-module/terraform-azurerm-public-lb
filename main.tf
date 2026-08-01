@@ -31,11 +31,7 @@ resource "azurerm_network_interface_backend_address_pool_association" "address_p
   ip_configuration_name   = var.backend_nic_frontend_ip_name
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
 }
-resource "azurerm_network_interface_backend_address_pool_association" "address_pool_association1" {
-  network_interface_id    = var.backend_network_interface1
-  ip_configuration_name   = var.backend_nic_frontend_ip_name1
-  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
-}
+
 resource "azurerm_lb_probe" "lb_probe" {
   loadbalancer_id = azurerm_lb.lb.id
   name            = "https"
@@ -48,8 +44,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   protocol                       = "Tcp"
   frontend_port                  = 443
   backend_port                   = 443
-  frontend_ip_configuration_name = "${var.name}-lb_front"
+  frontend_ip_configuration_name = "${var.name}-pubIP"
   probe_id                       = azurerm_lb_probe.lb_probe.id
-  disable_outbound_snat          = var.disable_outbound_snat
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.backend_pool.id]
 }

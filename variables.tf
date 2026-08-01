@@ -64,17 +64,3 @@ variable "probe_ports" {
   description = "(optional) describe your variable"
   default     = "443"
 }
-variable "disable_outbound_snat" {
-  type    = bool
-  default = false
-}
-
-variable "backend_network_interface1" {
-  type        = string
-  description = "The ID of the Network Interface."
-}
-
-variable "backend_nic_frontend_ip_name1" {
-  type        = string
-  description = "The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. "
-}
